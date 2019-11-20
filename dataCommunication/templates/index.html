@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jinja Flask Example</title>
+</head>
+<body>
+  <!-- Libraries -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- Before body stuff -->
+  <script>
+    const onButtonClick = () => {
+      axios.get('/__api__/lucky_number')
+        .then(response => {
+          const paragraph = document.getElementById('lucky-number-paragraph')
+          paragraph.innerHTML = response.data
+        })
+    }
+  </script>
+
+  <!-- Body stuff -->
+  <div class="container">
+    <p>Message: {{my_data.greeting}}</p>
+
+    <div>
+      {% for grocery in my_data.shopping_list %}
+      <h1>{{grocery}}</h1>
+      {% endfor %}
+    </div>
+
+    <button onclick="onButtonClick()">Get Lucky!</button>
+    <p id='lucky-number-paragraph'></p>
+  </div>
+
+  <!-- After body stuff -->
+  <script>
+    axios({
+      method: 'post',
+      url: '/__api__/change_lucky_number',
+      data: {
+        newNumber: 25
+      }
+    })
+  </script>
+</body>
+</html>

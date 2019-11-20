@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jinja Flask Example</title>
+</head>
+<body>
+  <!-- <h1>Hello!</h1> -->
+  <div class="container">
+    <p>My string: {{my_string}}</p>
+    <p>Value from the list: {{my_list[3]}}</p>
+    <p>Loop through the list:</p>
+    <ul>
+      {% for item in my_list %}
+      <li>{{item}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Point-and-click Mystery Game</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/4.1.5/cash.min.js"></script>
+</head>
+<body>
+  <h1>Hello!</h1>
+  {% for name in my_data.files %}
+    <a href="/{{name}}">
+      <div class="file-icon">
+        <p>{{name}}</p>
+      </div>
+    </a>  
+  {% endfor %}
+  <script src="/static/js/load.js"></script>
+</body>
+</html>

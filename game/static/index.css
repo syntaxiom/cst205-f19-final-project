@@ -1,6 +1,21 @@
-.file-icon {
-  height: 100px;
-  width: 100px;
-  background-color: rebeccapurple;
-  color: white;
+body {
+  background-image: url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 185px);
+  column-gap: 1rem;
+  row-gap: 3rem;
+}
+
+svg {
+  fill: current-color;
 }

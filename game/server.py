@@ -96,10 +96,13 @@ Quynh Nguyen
     },
     '/fun_time_with_Ken.png':{
         'static_path':'exs/fun_time_with_Ken.png'
+    },
+    #fake birthday txt
+    '/diary/19_April_2019.txt': {
+        'content': """The party was hella fun. I cannot believe that I met all of my friends again after a long time. They were asking about me and Josh. I just smiled. I enjoyed this day so far."""
     }
-    #fake birthday photos
-    
 }
+
 
 # ---------
 # Utilities

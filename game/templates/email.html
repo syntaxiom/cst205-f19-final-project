@@ -1,0 +1,22 @@
+{% block head %}
+  {% include 'jinja/head.html' %}
+{% endblock %}
+<div class='email'>
+    {% for message in my_data.messages %}
+    <div class='message'>
+        <div class='date'>
+            {{message.date}}
+        </div>
+        <div class='content'>
+            {{message.content}}
+        </div>
+        <div class='author'>
+            {{message.author}}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% block tail %}
+  {% include 'jinja/tail.html' %}
+{% endblock %}

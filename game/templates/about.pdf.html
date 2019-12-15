@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/4.1.5/cash.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
+{% block head %}
+  {% include 'jinja/head.html' %}
+{% endblock %}
+<div class='pdf'>    
     <div id='content'>
         {{my_data.content}}
     </div>
@@ -17,5 +10,7 @@
         const md = $('#content').text().trim()
         $('#content').html(marked(md))
     </script>
-</body>
-</html>
+</div>
+{% block tail %}
+  {% include 'jinja/tail.html' %}
+{% endblock %}

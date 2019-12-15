@@ -4,37 +4,68 @@
 
 from flask import Flask, render_template, jsonify, request
 import json
+import datetime
 
 app = Flask(__name__)
+
+# ------
+# Models
+# ------
+
+class Route:
+    def __init__(self, title):
+        self.title = title
+
+class File:
+    def __init__(self, name, hide_extension=False):
+        dots = name.split('.')
+        
+        if hide_extension:
+            self.name = dots[0]
+        else:
+            self.name = name
+            
+        self.extension = name.split('.')[-1]
+
+class Desktop(Route):
+    def __init__(self, title, files, icon_size):
+        Route.__init__(self, title)
+        self.files = files
+        self.icon_size = icon_size
+
+class Pdf(Route):
+    def __init__(self, title, content):
+        Route.__init__(self, title)
+        self.content = content
+
+class Message:
+    def __init__(self, date, content, author):
+        self.date = date
+        self.content = content
+        self.author = author
+
+class Email(Route):
+    def __init__(self, title, messages):
+        Route.__init__(self, title)
+        self.messages = messages
 
 # ----
 # Data
 # ----
 
 routes = {
-    '/': {
-        'greeting': 'Goodbye...',
-        'files': [
-            {
-                'name': 'hello.txt',
-                'extension': 'text'
-            },
-            {
-                'name': 'about.pdf',
-                'extension': 'pdf'
-            },
-            {
-                'name': 'Email',
-                'extension': 'email'
-            }
-        ]
-    },
-    '/hello.txt': {
-        'content': "Wait, don't look!"
-    },
-    '/about.pdf': { 
-        'content': 
-"""
+    '/': Desktop(
+        'Point-and-hack',
+        [
+            File('about.pdf'),
+            File('Email.email', True),
+            File('Diary.diary', True)
+        ],
+        '48px'
+    ),
+    '/about.pdf': Pdf(
+        'About this game',
+        """
 # Point-and-hack
 
 Crack the password! Er, the security questions to obtain the password! Why are we doing this again?
@@ -50,8 +81,30 @@ Quynh Nguyen
 ## Images
 
 ## Tools
-"""
-    },
+        """
+    ),
+    # Email
+    '/email': Email(
+        "Emily's email",
+        [
+            # real birthday
+            Message(
+                datetime.datetime(2019, 7, 22, 13, 37),
+                "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
+                "lauren1992@jmail.com"
+            ),
+            Message(
+                datetime.datetime(2019, 7, 22, 13, 37),
+                "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
+                "lauren1992@jmail.com"
+            ),
+            Message(
+                datetime.datetime(2019, 7, 22, 13, 37),
+                "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
+                "lauren1992@jmail.com"
+            )
+        ]
+    ),
     #real birthday
     '/email/22_Jul_2019.txt': {
         'content': "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren"
@@ -67,9 +120,6 @@ Quynh Nguyen
     },
 
     #red herring
-    '/discord_friends.png': {
-        'static_path': '/nested/because/easy.png'
-    },
     '/rex.jpeg': {
         'static_path': '/pets/rex.png'
     },
@@ -123,4 +173,5 @@ def index():
 # Dynamic route
 @app.route('/<name>')
 def dynamo(name):
+    name = name.lower()
     return render_template(name + '.html', my_data=routes['/' + name])

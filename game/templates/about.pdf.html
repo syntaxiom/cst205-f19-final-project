@@ -6,10 +6,9 @@
         {{my_data.content}}
     </div>
     
-    <script>
-        const md = $('#content').text().trim()
-        $('#content').html(marked(md))
-    </script>
+    {% block script %}
+      {% include 'jinja/pdf.html' %}
+    {% endblock %}
 </div>
 {% block tail %}
   {% include 'jinja/tail.html' %}

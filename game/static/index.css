@@ -1,3 +1,11 @@
+/* Variables */
+
+:root {
+  --pdf-color: orangered;
+  --email-color: skyblue;
+  --diary-color: pink;
+}
+
 /* Tags */
 
 html {
@@ -27,8 +35,16 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: currentColor;
+}
+
 h1 {
   margin-top: 0;
+}
+
+svg {
+  fill: currentColor;
 }
 
 /* Layouts */
@@ -53,12 +69,18 @@ h1 {
   height: 100%;
   
   /* Misc */
-  background-color: white;
-  padding-left: 8px;
-  padding-top: 8px;
+  background-color: var(--email-color);
+  padding: 8px 8px 0;
 }
 
-.email > .message {
+.email-message {
+  max-width: 800px;
+  margin: 36px auto;
+  box-sizing: border-box;
+}
+
+.email-message-content {
+  margin-top: 12px;
   margin-bottom: 24px;
 }
 
@@ -67,23 +89,19 @@ h1 {
 [class*="file-"] {
   background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
-  margin: 8px 24px;
+  margin: 24px 24px;
   padding: 8px;
   width: 150px;
 }
 
 .file-pdf {
-  color: orangered;
+  color: var(--pdf-color);
 }
 
 .file-email {
-  color: skyblue;
+  color: var(--email-color);
 }
 
 .file-diary {
-  color: pink;
-}
-
-svg {
-  fill: currentColor;
+  color: var(--diary-color);
 }

@@ -3,15 +3,14 @@
 {% endblock %}
 <div class='email'>
     {% for message in my_data.messages %}
-    <div class='message'>
-        <div class='date'>
-            {{message.date}}
-        </div>
-        <div class='content'>
-            {{message.content}}
-        </div>
-        <div class='author'>
-            {{message.author}}
+    <div class='email-message card'>
+        <div class='card-body'>
+            <h3 class='card-title'>{{message.subject}}</h3>
+            <h4 class='card-subtitle text-muted'>{{message.author}}</h4>
+            <div class='email-message-content'>
+                {{message.content}}
+            </div>
+            <h5 class='card-subtitle text-muted'>{{message.date}}</h5>
         </div>
     </div>
     {% endfor %}

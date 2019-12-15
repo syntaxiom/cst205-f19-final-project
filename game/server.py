@@ -39,7 +39,8 @@ class Pdf(Route):
         self.content = content
 
 class Message:
-    def __init__(self, date, content, author):
+    def __init__(self, subject, date, content, author):
+        self.subject = subject
         self.date = date
         self.content = content
         self.author = author
@@ -66,21 +67,21 @@ routes = {
     '/about.pdf': Pdf(
         'About this game',
         """
-# Point-and-hack
+        # Point-and-hack
 
-Crack the password! Er, the security questions to obtain the password! Why are we doing this again?
+        Crack the password! Er, the security questions to obtain the password! Why are we doing this again?
 
-## Authors
+        ## Authors
 
-Sean Lester-Wilson
+        Sean Lester-Wilson
 
-YE LIN JOH
+        YE LIN JOH
 
-Quynh Nguyen
+        Quynh Nguyen
 
-## Images
+        ## Images
 
-## Tools
+        ## Tools
         """
     ),
     # Email
@@ -89,20 +90,11 @@ Quynh Nguyen
         [
             # real birthday
             Message(
+                "Belated happy birthday!",
                 datetime.datetime(2019, 7, 22, 13, 37),
                 "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
                 "lauren1992@jmail.com"
             ),
-            Message(
-                datetime.datetime(2019, 7, 22, 13, 37),
-                "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
-                "lauren1992@jmail.com"
-            ),
-            Message(
-                datetime.datetime(2019, 7, 22, 13, 37),
-                "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
-                "lauren1992@jmail.com"
-            )
         ]
     ),
     #real birthday

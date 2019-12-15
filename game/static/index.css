@@ -5,6 +5,7 @@
   --email-color: skyblue;
   --diary-color: pink;
   --png-color: limegreen;
+  --zip-color: orange;
 }
 
 /* Tags */
@@ -72,6 +73,10 @@ svg {
   background-color: var(--diary-color);
 }
 
+.png {
+  background-color: var(--png-color);
+}
+
 .msg {
   max-width: 800px;
   margin: 36px auto;
@@ -83,9 +88,18 @@ svg {
   margin-bottom: 24px;
 }
 
+.secret {
+  background-color: darkorange;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 24px;
+}
+
 /* Files */
 
-[class*="file-"] {
+.file {
   background-color: rgba(0, 0, 0, 0.67);
   margin: 24px 24px;
   padding: 8px;
@@ -108,4 +122,8 @@ svg {
 
 .file-png {
   color: var(--png-color);
+}
+
+.file-zip {
+  color: var(--zip-color);
 }

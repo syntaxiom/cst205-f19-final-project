@@ -1,0 +1,11 @@
+{% block head %}
+  {% include 'jinja/head.html' %}
+{% endblock %}
+
+<div class='png app'>
+  <img src="{{my_data.url}}" alt="photo">
+</div>
+
+{% block tail %}
+  {% include 'jinja/tail.html' %}
+{% endblock %}

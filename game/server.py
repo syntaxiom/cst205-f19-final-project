@@ -135,11 +135,11 @@ diaries = [
 pictures = [
     Picture('fun_time_with_Ken.png', 'exs/Ken.png'),
     Picture('old_memory_David.png', 'exs/David.png'),
-    Picture('rex.png', '/pets/rex.png'),
-    Picture('roo.png', '/pets/roo.png'),
-    Picture('dolly.png', '/pets/max.png'),
-    Picture('max.png', '/pets/max.png'),
-    Picture('lucy.png', '/pets/lucy.png')
+    Picture('rex.png', 'pets/rex.png'),
+    Picture('roo.png', 'pets/roo.png'),
+    Picture('dolly.png', 'pets/max.png'),
+    Picture('max.png', 'pets/max.png'),
+    Picture('lucy.png', 'pets/lucy.png')
 ]
 
 files = []
@@ -147,6 +147,11 @@ files.extend(PDFs)
 files.extend(emails)
 files.extend(diaries)
 files.extend(pictures)
+files.append(File('secret.zip'))
+
+# ----------
+# Route data
+# ----------
 
 routes = {
     '/': Desktop(
@@ -159,6 +164,13 @@ routes = {
 for file in files:
     routes[f"/{file.name}"] = file
 
+# ---------
+# Utilities
+# ---------
+
+def bytesToDictionary(bytes):
+    return json.loads(bytes.decode('utf8'))
+
 # ------
 # Routes
 # ------
@@ -169,5 +181,9 @@ def index():
     
 @app.route('/<name>')
 def dynamo(name):
-    name = name.lower()
     return render_template(name + '.html', my_data=routes['/' + name])
+
+@app.route('/api/guess', methods=['POST'])
+def guess():
+    req = bytesToDictionary(request.data)
+    return jsonify(req)

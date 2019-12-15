@@ -86,7 +86,7 @@ svg {
 /* Files */
 
 [class*="file-"] {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.67);
   margin: 24px 24px;
   padding: 8px;
   text-align: center;

@@ -5,6 +5,7 @@
 from flask import Flask, render_template, jsonify, request
 import json
 import datetime
+import random
 
 app = Flask(__name__)
 
@@ -33,7 +34,7 @@ class Desktop(Route):
         self.files = files
         self.icon_size = icon_size
 
-class Pdf(Route):
+class PDF(Route):
     def __init__(self, title, content):
         Route.__init__(self, title)
         self.content = content
@@ -60,15 +61,56 @@ class Diary(Route):
         Route.__init__(self, "Emily's diary")
         self.entry = entry
 
+class Picture(File):
+    def __init__(self, name, url):
+        File.__init__(self, name)
+        self.url = f"static/{url}"
+
 # ----
 # Data
 # ----
+
+PDFs = [
+    PDF(
+        'About this game',
+        """
+        # Point-and-hack
+
+        Crack the password! Er, the security questions to obtain the password! Why are we doing this again?
+
+        ## Authors
+
+        Sean Lester-Wilson
+
+        YE LIN JOH
+
+        Quynh Nguyen
+
+        ## Images
+
+        ## Tools
+        """
+    ),
+]
+
+pictures = [
+    Picture('fun_time_with_Ken.png', 'exs/Ken.png'),
+    Picture('old_memory_David.png', 'exs/David.png')
+]
 
 real_birthday_email = "lauren<3.email"
 real_exs_name_diary = "feb_14_2019.diary"
 
 fake_birthday_diary = "apr_19_2019.diary"
 fake_exs_name_diary = "dec_09_2019.diary"
+
+files = [
+    File('about.pdf'),
+    File(real_birthday_email),
+    File(real_exs_name_diary),
+    File(fake_birthday_diary),
+    File(fake_exs_name_diary),
+]
 
 # ------
 # Routes
@@ -77,19 +119,11 @@ fake_exs_name_diary = "dec_09_2019.diary"
 routes = {
     '/': Desktop(
         'Point-and-hack',
-        [
-            File('about.pdf'),
-            # File('Email.email', True),
-            File(real_birthday_email),
-            # File('Diary.diary', True)
-            File(real_exs_name_diary),
-            File(fake_birthday_diary),
-            File(fake_exs_name_diary)
-        ],
+        random.sample(files, len(files)),
         '48px'
     ),
     
-    '/about.pdf': Pdf(
+    '/about.pdf': PDF(
         'About this game',
         """
         # Point-and-hack
@@ -169,10 +203,9 @@ routes = {
     #fake exs photos
     '/old_memory_David.png': {
         'static_path': 'exs/old_memory_David.png'
-
     },
     '/fun_time_with_Ken.png':{
-        'static_path':'exs/fun_time_with_Ken.png'
+        'static_path': 'exs/fun_time_with_Ken.png'
     },
     
 }
@@ -189,12 +222,10 @@ def bytesToDictionary(bytes):
 # Routes
 # ------
 
-# Index (home) route
 @app.route('/')
 def index():
     return render_template('index.html', my_data=routes['/'])
     
-# Dynamic route
 @app.route('/<name>')
 def dynamo(name):
     name = name.lower()

@@ -1,9 +1,10 @@
 /* Variables */
 
 :root {
-  --pdf-color: orangered;
+  --pdf-color: red;
   --email-color: skyblue;
   --diary-color: pink;
+  --png-color: limegreen;
 }
 
 /* Tags */
@@ -90,6 +91,7 @@ svg {
   margin: 24px 24px;
   padding: 8px;
   width: 250px;
+  font-weight: bold;
 }
 
 .file-pdf {
@@ -102,4 +104,8 @@ svg {
 
 .file-diary {
   color: var(--diary-color);
+}
+
+.file-png {
+  color: var(--png-color);
 }

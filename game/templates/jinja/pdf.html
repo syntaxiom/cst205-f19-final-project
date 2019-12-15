@@ -1,15 +1,23 @@
-<div class='pdf app'>
-    <div id='content'>
-        {{my_data.content}}
-    </div>
+{% block head %}
+  {% include 'jinja/head.html' %}
+{% endblock %}
+
+<div class='pdf'>
+  <div id='content'>
+    {{my_data.content}}
+  </div>
 </div>
 
 <script>
-    const md = 
-        $('#content').text()
-        .trim()
-        .split('\n').map(line => line.trim())
-        .join('\n')
+  const md = 
+    $('#content').text()
+    .trim()
+    .split('\n').map(line => line.trim())
+    .join('\n')
 
-    $('#content').html(marked(md))
+  $('#content').html(marked(md))
 </script>
+
+{% block tail %}
+  {% include 'jinja/tail.html' %}
+{% endblock %}

@@ -9,6 +9,12 @@ import random
 
 app = Flask(__name__)
 
+answers = {
+    'q1': 'roo',
+    'q2': '07/22/2019',
+    'q3': 'peter'
+}
+
 # ------
 # Models
 # ------
@@ -66,9 +72,9 @@ class Picture(File):
         File.__init__(self, name)
         self.url = f"static/{url}"
         
-# ----
-# Data
-# ----
+# ---------
+# File data
+# ---------
 
 real_birthday_email = "lauren<3.email"
 
@@ -97,8 +103,36 @@ PDFs = [
         Quynh Nguyen
 
         ## Images
-
-        ## Tools
+        
+        All images are from [Unsplash](https://unsplash.com/).
+        
+        ### [Lucy](https://unsplash.com/photos/ngqyo2AYYnE)
+        
+        [Berkay Gumustekin](https://unsplash.com/@berkaygumustekin)
+        
+        ### [Pie](https://unsplash.com/photos/AovflqCt9Ws)
+        
+        [Lydia Torrey](https://unsplash.com/@soulsaperture)
+        
+        ### [Max](https://unsplash.com/photos/khZDD0BgbPM)
+        
+        [Maddi Bazzocco](https://unsplash.com/@maddibazzocco)
+        
+        ### [Rex](https://unsplash.com/photos/rssC3bQr0x8)
+        
+        [Andrii Podilnyk](https://unsplash.com/@yirage)
+        
+        ### [Dolly](https://unsplash.com/photos/lvFlpqEvuRM)
+        
+        [ipet photo](https://unsplash.com/@ipet_photo)
+        
+        ### [Roo](https://unsplash.com/photos/hLbi5hve5Yc)
+        
+        [Michael Hardy](https://unsplash.com/@michaelhardy)
+        
+        ## Icons
+        
+        All icons are from [Remix Icon](https://remixicon.com/)
         """
     ),
 ]
@@ -135,11 +169,12 @@ diaries = [
 pictures = [
     Picture('fun_time_with_Ken.png', 'exs/Ken.png'),
     Picture('old_memory_David.png', 'exs/David.png'),
-    Picture('rex.png', 'pets/rex.png'),
+    Picture('rex.png', 'pets/rex.jpg'),
     Picture('roo.png', 'pets/roo.png'),
-    Picture('dolly.png', 'pets/max.png'),
-    Picture('max.png', 'pets/max.png'),
-    Picture('lucy.png', 'pets/lucy.png')
+    Picture('dolly.png', 'pets/dolly.jpg'),
+    Picture('max.png', 'pets/max.jpg'),
+    Picture('lucy.png', 'pets/lucy.jpg'),
+    Picture('my_angel_pie.png', 'pets/pie.jpg')
 ]
 
 files = []
@@ -158,7 +193,9 @@ routes = {
         'Point-and-hack',
         random.sample(files, len(files)),
         '48px',
-    )
+    ),
+    '/win': None,
+    '/lose': None
 }
 
 for file in files:
@@ -186,4 +223,8 @@ def dynamo(name):
 @app.route('/api/guess', methods=['POST'])
 def guess():
     req = bytesToDictionary(request.data)
-    return jsonify(req)
+    return jsonify({
+        'a1': req['q1'] == answers['q1'],
+        'a2': req['q2'] == answers['q2'],
+        'a3': req['q3'] == answers['q3'],
+    })

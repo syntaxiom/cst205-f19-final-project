@@ -57,7 +57,7 @@ svg {
 
 .desktop {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
 }
 
 .pdf {
@@ -87,11 +87,11 @@ svg {
 
 [class*="file-"] {
   background-color: rgba(0, 0, 0, 0.4);
-  text-align: center;
   margin: 24px 24px;
   padding: 8px;
-  width: 250px;
+  text-align: center;
   font-weight: bold;
+  height: 100px;
 }
 
 .file-pdf {

@@ -1,15 +1,11 @@
 {% block head %}
   {% include 'jinja/head.html' %}
 {% endblock %}
-<div class='pdf'>    
-    <div id='content'>
-        {{my_data.content}}
-    </div>
+
+{% block script %}
+  {% include 'jinja/pdf.html' %}
+{% endblock %}
     
-    {% block script %}
-      {% include 'jinja/pdf.html' %}
-    {% endblock %}
-</div>
 {% block tail %}
   {% include 'jinja/tail.html' %}
 {% endblock %}

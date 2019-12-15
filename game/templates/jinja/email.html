@@ -3,16 +3,18 @@
 {% endblock %}
 
 <div class='email app'>
+    {% for message in my_data.messages %}
     <div class='msg card'>
         <div class='card-body'>
-            <h3 class='card-title'>{{my_data.message.subject}}</h3>
-            <h4 class='card-subtitle text-muted'>{{my_data.message.author}}</h4>
+            <h3 class='card-title'>{{message.subject}}</h3>
+            <h4 class='card-subtitle text-muted'>{{message.author}}</h4>
             <div class='email-message-content'>
-                {{my_data.message.content}}
+                {{message.content}}
             </div>
-            <h5 class='card-subtitle text-muted'>{{my_data.message.date}}</h5>
+            <h5 class='card-subtitle text-muted'>{{message.date}}</h5>
         </div>
     </div>
+    {% endfor %}
 </div>
 
 {% block tail %}

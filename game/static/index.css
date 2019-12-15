@@ -18,7 +18,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-y: hidden;
   
   /* Background */
   background-image: url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
@@ -41,6 +40,7 @@ a:hover {
 
 h1 {
   margin-top: 0;
+  margin-bottom: 12px;
 }
 
 svg {
@@ -49,37 +49,35 @@ svg {
 
 /* Layouts */
 
-.desktop {
-  /* Reset */
+.app {
   height: 100%;
-}
-
-.pdf {
-  /* Reset */
-  height: 100%;
-  
-  /* Misc */
-  background-color: white;
-  padding-left: 8px;
-  padding-top: 8px;
-}
-
-.email {
-  /* Reset */
-  height: 100%;
-  
-  /* Misc */
-  background-color: var(--email-color);
   padding: 8px 8px 0;
 }
 
-.email-message {
+.desktop {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.pdf {
+  background-color: white;
+}
+
+.email {
+  background-color: var(--email-color);
+}
+
+.diary {
+  background-color: var(--diary-color);
+}
+
+.msg {
   max-width: 800px;
   margin: 36px auto;
   box-sizing: border-box;
 }
 
-.email-message-content {
+.msg-content {
   margin-top: 12px;
   margin-bottom: 24px;
 }

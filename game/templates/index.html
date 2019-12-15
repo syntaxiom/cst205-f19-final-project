@@ -1,7 +1,7 @@
 {% block head %}
   {% include 'jinja/head.html' %}
 {% endblock %}
-  <div class="desktop">
+  <div class='desktop app'>
     {% for file in my_data.files %}
     <div class="file-{{file.extension}}">
       <a href="/{{file.name}}">

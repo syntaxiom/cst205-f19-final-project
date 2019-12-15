@@ -1,0 +1,20 @@
+{% block head %}
+  {% include 'jinja/head.html' %}
+{% endblock %}
+
+<div class='diary app'>
+    {% for entry in my_data.entries %}
+    <div class='msg card'>
+        <div class='card-body'>
+            <h3 class='card-title'>{{entry.subject}}</h3>
+            <div class='msg-content'>
+                {{entry.content}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% block tail %}
+  {% include 'jinja/tail.html' %}
+{% endblock %}

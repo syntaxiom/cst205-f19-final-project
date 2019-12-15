@@ -50,6 +50,16 @@ class Email(Route):
         Route.__init__(self, title)
         self.messages = messages
 
+class Entry:
+    def __init__(self, subject, content):
+        self.subject = subject
+        self.content = content
+
+class Diary(Route):
+    def __init__(self, title, entries):
+        Route.__init__(self, title)
+        self.entries = entries
+
 # ----
 # Data
 # ----
@@ -64,6 +74,7 @@ routes = {
         ],
         '48px'
     ),
+    
     '/about.pdf': Pdf(
         'About this game',
         """
@@ -84,7 +95,7 @@ routes = {
         ## Tools
         """
     ),
-    # Email
+    
     '/email': Email(
         "Emily's email",
         [
@@ -97,14 +108,30 @@ routes = {
             ),
         ]
     ),
-    #real birthday
-    '/email/22_Jul_2019.txt': {
-        'content': "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren"
-    },
-    #real ex's name
-    '/diary/14_Feb_2019.txt': {
-        'content': "February 14, 2019 Today felt like the longest day of my life. I knew it would be, because I've had the Computer Science and Art History midterms marked in my calendar for weeks, plus it's Valentine's Day, and with everything that happened with Peter last month I knew any mention of the word \"love\" would make me want to throw up..."
-    },
+    
+    '/diary': Diary(
+        "Emily's diary", sorted(
+            [
+                # real ex's name
+                Entry(
+                    "February 14, 2019",
+                    "Today felt like the longest day of my life. I knew it would be, because I've had the Computer Science and Art History midterms marked in my calendar for weeks, plus it's Valentine's Day, and with everything that happened with Peter last month I knew any mention of the word \"love\" would make me want to throw up..."
+                ),
+                # fake birthday
+                Entry(
+                    "April 19, 2019",
+                    """The party was hella fun. I cannot believe that I met all of my friends again after a long time. They were asking about me and Josh. I just smiled. I enjoyed this day so far."""
+                ),
+                Entry(
+                    "December 9, 2019",
+                    """It's been a while. I saw her again at the mall today. I said 'hey Dan'. He said hi back to me. We talked for 30 minutes. Then I had to leave for a meeting. He asked me to meet up again if we have some free time. I was happy that I got to see him
+                    again after a long time."""
+                )
+            ],
+            key=lambda entry: entry.subject
+        )
+        
+    ),
     
     #real dog
     '/roo.png': {
@@ -127,10 +154,7 @@ routes = {
     '/my_little_angel_pie.png': {
         'static_path':'/pets/pie.png'
     },
-    '/diary/9_Dec_2019.txt': {
-        'content': """It's been a while. I saw her again at the mall today. I said 'hey Dan'. He said hi back to me. We talked for 30 minutes. Then I had to leave for a meeting. He asked me to meet up again if we have some free time. I was happy that I got to see him
-         again after a long time. """
-    },
+    
     #fake exs photos
     '/old_memory_David.png': {
         'static_path': 'exs/old_memory_David.png'
@@ -139,10 +163,7 @@ routes = {
     '/fun_time_with_Ken.png':{
         'static_path':'exs/fun_time_with_Ken.png'
     },
-    #fake birthday txt
-    '/diary/19_April_2019.txt': {
-        'content': """The party was hella fun. I cannot believe that I met all of my friends again after a long time. They were asking about me and Josh. I just smiled. I enjoyed this day so far."""
-    }
+    
 }
 
 

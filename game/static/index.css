@@ -4,7 +4,7 @@
   --pdf-color: red;
   --email-color: skyblue;
   --diary-color: pink;
-  --png-color: limegreen;
+  --photo-color: limegreen;
   --zip-color: orange;
 }
 
@@ -59,6 +59,7 @@ svg {
   background-image: url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-y: hidden;
 }
 
 .pdf {
@@ -69,6 +70,7 @@ svg {
   max-width: 1000px;
   margin: 0 auto;
   background-color: white;
+  padding: 24px;
 }
 
 .email {
@@ -79,8 +81,8 @@ svg {
   background-color: var(--diary-color);
 }
 
-.png {
-  background-color: var(--png-color);
+.photo {
+  background-color: black;
 }
 
 .pic {
@@ -123,7 +125,8 @@ svg {
 
 .file {
   background-color: rgba(0, 0, 0, 0.67);
-  margin: 24px 24px;
+  margin-left: 24px;
+  margin-right: 24px;
   padding: 8px;
   text-align: center;
   font-weight: bold;
@@ -142,8 +145,8 @@ svg {
   color: var(--diary-color);
 }
 
-.file-png {
-  color: var(--png-color);
+.file-photo {
+  color: var(--photo-color);
 }
 
 .file-zip {

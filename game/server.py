@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 answers = {
     'q1': 'roo',
-    'q2': '07/22/2019',
+    'q2': '07/21/2019',
     'q3': 'peter'
 }
 
@@ -32,7 +32,7 @@ class File:
         else:
             self.name = name
             
-        self.extension = name.split('.')[-1]
+        self.extension = dots[-1]
 
 # ------------
 # Route models
@@ -50,12 +50,12 @@ class Desktop(Route):
 
 class PDF(File):
     def __init__(self, name, content):
-        File.__init__(self, name)
+        File.__init__(self, f"{name}.pdf")
         self.content = content
 
 class Email(File):
     def __init__(self, name, subject, date, content, author):
-        File.__init__(self, name)
+        File.__init__(self, f"{name}.email")
         self.subject = subject
         self.date = date
         self.content = content
@@ -63,24 +63,24 @@ class Email(File):
 
 class Diary(File):
     def __init__(self, name, subject, content):
-        File.__init__(self, name)
+        File.__init__(self, f"{name}.diary")
         self.subject = subject
         self.content = content
 
 class Picture(File):
     def __init__(self, name, url):
-        File.__init__(self, name)
+        File.__init__(self, f"{name}.photo")
         self.url = f"static/{url}"
         
 # ---------
 # File data
 # ---------
 
-real_birthday_email = "lauren<3.email"
+real_birthday_email = "lauren<3"
 
-real_exs_name_diary = "feb_14_2019.diary"
-fake_birthday_diary = "apr_19_2019.diary"
-fake_exs_name_diary = "dec_09_2019.diary"
+real_exs_name_diary = "feb_14_2019"
+fake_birthday_diary = "apr_19_2019"
+fake_exs_name_diary = "dec_09_2019"
 
 # -----
 # Files
@@ -88,7 +88,7 @@ fake_exs_name_diary = "dec_09_2019.diary"
 
 PDFs = [
     PDF(
-        'about.pdf',
+        'about',
         """
         # Point-and-hack
 
@@ -145,6 +145,34 @@ emails = [
         "Hi, Emily. It's Lauren. Belated Happy Birthday! I do not know how I missed your birthday, but I hope it was a good one and that you enjoyed your special party last night. Best wishes for the coming year. Belated Happy Birthday. With Love, Lauren",
         "lauren1992@jmail.com"
     ),
+    Email(
+        "whatever", # file name
+        "Ignore this", # title
+        datetime.datetime(1995, 8, 14, 12, 48), # date
+        "wefwofwoeifjwioefwiefiowefjoiwefjweoif", # body
+        "sean@jmail.com" # sender
+    ),
+    Email(
+        "dollar",
+        "ENDS TONIGHT! Site-Wide Savings Expiring at 11:59 PM PST!",
+        datetime.datetime(2019, 12, 15, 12, 3),
+        """ENDS TONIGHT! SITE WIDE SAVINGS: COMPUTERS, BEAUTY, CHAIRS, KAYAKS, BLANKETS, RUGS, EXERCISE, SPAS, GIFT BASKETS, MORE 
+        
+        Lonovo Pad 1 14\" 1080p Laptop with AMD A9 $199.99 After $80 OFF Plus S&H
+        
+        Brindoll Toilet Seat $299.99 Delivered After $200 OFF\n Woodstone 9-piece Dining Set $999.99 Delivered After $200 OFF
+        
+        FitPro Bike-pro Duo with 6 Months Coach Included, Minimal Assembly Required $199.9Deliered After $100 OFF""",
+        "Dollar@online.dollar.com"
+    ),
+
+    Email(
+        "amazon_forest",
+        "Your Student Membership: shop Last-Minute Deals",
+        datetime.datetime(2019, 6, 23, 12, 20),
+        """Your Student membership includes access to more than 1,000 books, maganizes  and comics - all available to read free. Learn more about these via our websites.""",
+        "store-news@amazon_forest.com"
+    )
 ]
 
 diaries = [
@@ -167,14 +195,14 @@ diaries = [
 ]
 
 pictures = [
-    Picture('fun_time_with_Ken.png', 'exs/Ken.png'),
-    Picture('old_memory_David.png', 'exs/David.png'),
-    Picture('rex.png', 'pets/rex.jpg'),
-    Picture('roo.png', 'pets/roo.png'),
-    Picture('dolly.png', 'pets/dolly.jpg'),
-    Picture('max.png', 'pets/max.jpg'),
-    Picture('lucy.png', 'pets/lucy.jpg'),
-    Picture('my_angel_pie.png', 'pets/pie.jpg')
+    Picture('fun_time_with_Ken', 'exs/Ken.png'),
+    Picture('old_memory_David', 'exs/David.png'),
+    Picture('rex', 'pets/rex.jpg'),
+    Picture('bestest_boy_roo', 'pets/roo.jpg'),
+    Picture('dolly', 'pets/dolly.jpg'),
+    Picture('max', 'pets/max.jpg'),
+    Picture('lucy', 'pets/lucy.jpg'),
+    Picture('my_angel_pie', 'pets/pie.jpg')
 ]
 
 files = []
@@ -226,5 +254,5 @@ def guess():
     return jsonify({
         'a1': req['q1'] == answers['q1'],
         'a2': req['q2'] == answers['q2'],
-        'a3': req['q3'] == answers['q3'],
+        'a3': req['q3'] == answers['q3']
     })
